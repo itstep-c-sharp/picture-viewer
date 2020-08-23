@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.folderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,14 +47,15 @@
             this.Start = new System.Windows.Forms.Button();
             this.Stop = new System.Windows.Forms.Button();
             this.Reset = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label1 = new System.Windows.Forms.Label();
+            this.Delay = new System.Windows.Forms.NumericUpDown();
+            this.Progress = new System.Windows.Forms.ProgressBar();
+            this.Indicator = new System.Windows.Forms.Label();
             this.ViewBox = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Delay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ViewBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,9 +150,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.progressBar1);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.Indicator);
+            this.groupBox1.Controls.Add(this.Progress);
+            this.groupBox1.Controls.Add(this.Delay);
             this.groupBox1.Controls.Add(this.Reset);
             this.groupBox1.Controls.Add(this.Stop);
             this.groupBox1.Controls.Add(this.Start);
@@ -183,6 +185,7 @@
             this.Backward.TabIndex = 0;
             this.Backward.Text = "<<<";
             this.Backward.UseVisualStyleBackColor = true;
+            this.Backward.Click += new System.EventHandler(this.Backward_Click);
             // 
             // Forward
             // 
@@ -192,6 +195,7 @@
             this.Forward.TabIndex = 1;
             this.Forward.Text = ">>>";
             this.Forward.UseVisualStyleBackColor = true;
+            this.Forward.Click += new System.EventHandler(this.Forward_Click);
             // 
             // Start
             // 
@@ -201,64 +205,69 @@
             this.Start.TabIndex = 2;
             this.Start.Text = "Старт";
             this.Start.UseVisualStyleBackColor = true;
+            this.Start.Click += new System.EventHandler(this.Start_Click);
             // 
             // Stop
             // 
+            this.Stop.Enabled = false;
             this.Stop.Location = new System.Drawing.Point(464, 43);
             this.Stop.Name = "Stop";
             this.Stop.Size = new System.Drawing.Size(98, 32);
             this.Stop.TabIndex = 3;
             this.Stop.Text = "Стоп";
             this.Stop.UseVisualStyleBackColor = true;
+            this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
             // Reset
             // 
+            this.Reset.Enabled = false;
             this.Reset.Location = new System.Drawing.Point(577, 43);
             this.Reset.Name = "Reset";
             this.Reset.Size = new System.Drawing.Size(98, 32);
             this.Reset.TabIndex = 4;
             this.Reset.Text = "Сброс";
             this.Reset.UseVisualStyleBackColor = true;
+            this.Reset.Click += new System.EventHandler(this.Reset_Click);
             // 
-            // numericUpDown1
+            // Delay
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numericUpDown1.Location = new System.Drawing.Point(690, 45);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.Delay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Delay.Location = new System.Drawing.Point(690, 45);
+            this.Delay.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.Delay.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(77, 28);
-            this.numericUpDown1.TabIndex = 5;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.Delay.Name = "Delay";
+            this.Delay.Size = new System.Drawing.Size(77, 28);
+            this.Delay.TabIndex = 5;
+            this.Delay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Delay.Value = new decimal(new int[] {
             3,
             0,
             0,
             0});
             // 
-            // progressBar1
+            // Progress
             // 
-            this.progressBar1.Location = new System.Drawing.Point(808, 43);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(269, 30);
-            this.progressBar1.TabIndex = 6;
+            this.Progress.Location = new System.Drawing.Point(808, 43);
+            this.Progress.Name = "Progress";
+            this.Progress.Size = new System.Drawing.Size(269, 30);
+            this.Progress.TabIndex = 6;
             // 
-            // label1
+            // Indicator
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(931, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 18);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "0%";
+            this.Indicator.AutoSize = true;
+            this.Indicator.Location = new System.Drawing.Point(909, 20);
+            this.Indicator.Name = "Indicator";
+            this.Indicator.Size = new System.Drawing.Size(61, 18);
+            this.Indicator.TabIndex = 7;
+            this.Indicator.Text = "Slide - 0";
             // 
             // ViewBox
             // 
@@ -270,6 +279,11 @@
             this.ViewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ViewBox.TabIndex = 0;
             this.ViewBox.TabStop = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -292,7 +306,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Delay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ViewBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -316,12 +330,13 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox ViewBox;
         private System.Windows.Forms.Button Forward;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label Indicator;
+        private System.Windows.Forms.ProgressBar Progress;
+        private System.Windows.Forms.NumericUpDown Delay;
         private System.Windows.Forms.Button Reset;
         private System.Windows.Forms.Button Stop;
         private System.Windows.Forms.Button Start;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
