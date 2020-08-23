@@ -41,7 +41,6 @@
             this.FilesList = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ViewBox = new System.Windows.Forms.PictureBox();
             this.Backward = new System.Windows.Forms.Button();
             this.Forward = new System.Windows.Forms.Button();
             this.Start = new System.Windows.Forms.Button();
@@ -50,11 +49,12 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
+            this.ViewBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ViewBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ViewBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -84,7 +84,7 @@
             // 
             this.OpenItem.Name = "OpenItem";
             this.OpenItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.OpenItem.Size = new System.Drawing.Size(181, 26);
+            this.OpenItem.Size = new System.Drawing.Size(173, 26);
             this.OpenItem.Text = "&Open";
             this.OpenItem.Click += new System.EventHandler(this.OpenItem_Click);
             // 
@@ -92,7 +92,7 @@
             // 
             this.CloseItem.Name = "CloseItem";
             this.CloseItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.CloseItem.Size = new System.Drawing.Size(181, 26);
+            this.CloseItem.Size = new System.Drawing.Size(173, 26);
             this.CloseItem.Text = "&Close";
             this.CloseItem.Click += new System.EventHandler(this.CloseItem_Click);
             // 
@@ -100,7 +100,7 @@
             // 
             this.ExitItem.Name = "ExitItem";
             this.ExitItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.ExitItem.Size = new System.Drawing.Size(181, 26);
+            this.ExitItem.Size = new System.Drawing.Size(173, 26);
             this.ExitItem.Text = "&Exit";
             this.ExitItem.Click += new System.EventHandler(this.ExitItem_Click);
             // 
@@ -144,6 +144,7 @@
             this.FilesList.ScrollAlwaysVisible = true;
             this.FilesList.Size = new System.Drawing.Size(246, 560);
             this.FilesList.TabIndex = 1;
+            this.FilesList.SelectedIndexChanged += new System.EventHandler(this.FilesList_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -173,17 +174,6 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Просмотр";
-            // 
-            // ViewBox
-            // 
-            this.ViewBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ViewBox.Image = global::PictureViewer.Properties.Resources.logo2;
-            this.ViewBox.Location = new System.Drawing.Point(3, 20);
-            this.ViewBox.Name = "ViewBox";
-            this.ViewBox.Size = new System.Drawing.Size(1118, 427);
-            this.ViewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ViewBox.TabIndex = 0;
-            this.ViewBox.TabStop = false;
             // 
             // Backward
             // 
@@ -270,6 +260,17 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "0%";
             // 
+            // ViewBox
+            // 
+            this.ViewBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ViewBox.Image = global::PictureViewer.Properties.Resources.logo;
+            this.ViewBox.Location = new System.Drawing.Point(3, 20);
+            this.ViewBox.Name = "ViewBox";
+            this.ViewBox.Size = new System.Drawing.Size(1118, 427);
+            this.ViewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ViewBox.TabIndex = 0;
+            this.ViewBox.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -291,8 +292,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ViewBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ViewBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
