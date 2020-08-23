@@ -79,5 +79,98 @@ namespace PictureViewer
             int k = FilesList.SelectedIndex;
             ViewBox.Image = Image.FromFile(FilePathes[k]);
         }
+
+        private void Backward_Click(object sender, EventArgs e)
+        {
+            int k = FilesList.SelectedIndex;
+            if (k == -1)
+            {
+                MessageBox.Show("Вы не выбрали текущее изображение!", "Предупреждение",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                if (k == 0)
+                {
+                    k = FilesList.Items.Count - 1;
+                }
+                else
+                {
+                    k--;
+                }
+                FilesList.SelectedIndex = k;
+            }
+        }
+
+        private void Forward_Click(object sender, EventArgs e)
+        {
+            int k = FilesList.SelectedIndex;
+            if (k == -1)
+            {
+                MessageBox.Show("Вы не выбрали текущее изображение!", "Предупреждение",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                if (k == FilesList.Items.Count - 1)
+                {
+                    k = 0;
+                }
+                else
+                {
+                    k++;
+                }
+                FilesList.SelectedIndex = k;
+            }
+        }
+
+        private void Start_Click(object sender, EventArgs e)
+        {
+            if (FilesList.SelectedIndex == -1)
+            {
+                MessageBox.Show("Вы не выбрали текущее изображение!", "Предупреждение",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                Progress.Value = FilesList.SelectedIndex + 1;
+                Progress.Maximum = FilesList.Items.Count;
+                timer1.Interval = Convert.ToInt32(Delay.Value) * 1000;
+                timer1.Start();
+                Start.Enabled = false;
+                Stop.Enabled = true;
+                Reset.Enabled = false;
+            }
+        }
+
+        private void Stop_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            Start.Enabled = true;
+            Stop.Enabled = false;
+            Reset.Enabled = true;
+        }
+
+        private void Reset_Click(object sender, EventArgs e)
+        {
+            Start.Enabled = true;
+            Stop.Enabled = false;
+            Reset.Enabled = false;
+            FilesList.SelectedIndex = 0;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {            
+            if (FilesList.SelectedIndex == FilesList.Items.Count - 1)
+            {
+                FilesList.SelectedIndex = 0;
+                Progress.Value = 0;
+            }
+            else
+            {               
+                FilesList.SelectedIndex++;
+                Progress.Value++;
+            }
+        }
     }
 }
